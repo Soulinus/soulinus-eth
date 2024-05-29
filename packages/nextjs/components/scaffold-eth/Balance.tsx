@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import { useTargetNetwork } from "@/hooks/scaffold-eth/useTargetNetwork";
+import { useWatchBalance } from "@/hooks/scaffold-eth/useWatchBalance";
+import { useGlobalState } from "@/services/store/store";
 import { Address, formatEther } from "viem";
-import { useTargetNetwork } from "~~/hooks/scaffold-eth/useTargetNetwork";
-import { useWatchBalance } from "~~/hooks/scaffold-eth/useWatchBalance";
-import { useGlobalState } from "~~/services/store/store";
 
 type BalanceProps = {
   address?: Address;
