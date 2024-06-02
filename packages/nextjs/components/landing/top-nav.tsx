@@ -11,7 +11,7 @@ export function TopNav() {
           <div className="mr-4 shrink-0">
             {/* Logo */}
             <Link href="/" className="block" aria-label="Soulinus">
-              <img src="./logo.png" alt="logo" className="w-16" />
+              <img src="/logo.png" alt="logo" className="w-16" />
             </Link>
           </div>
 
