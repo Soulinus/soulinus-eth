@@ -1,9 +1,9 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
-import { Contract } from "ethers";
+// import { Contract } from "ethers";
 
 /**
- * Deploys a contract named "EthInheritance" using the deployer account and
+ * Deploys a contract named "WillFactory" using the deployer account and
  * constructor arguments set to the deployer address
  *
  * @param hre HardhatRuntimeEnvironment object.
@@ -22,7 +22,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
 
-  await deploy("EthInheritance", {
+  await deploy("WillFactory", {
     from: deployer,
     // Contract constructor arguments
     args: [],
@@ -33,12 +33,13 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   });
 
   // Get the deployed contract to interact with it after deploying.
-  const ethInheritanceContract = await hre.ethers.getContract<Contract>("EthInheritance", deployer);
-  console.log("👋 Initial balance:", await ethInheritanceContract.getContractBalance());
+  // const contract = await hre.ethers.getContractAt("WillFactory", deployer);
+  // console.log('contract', contract);
+  // console.log("👋 Address:", await contract.address);
 };
 
 export default deployYourContract;
 
 // Tags are useful if you have multiple deploy files and only want to run one of them.
-// e.g. yarn deploy --tags EthInheritance
-deployYourContract.tags = ["EthInheritance"];
+// e.g. yarn deploy --tags WillFactory
+deployYourContract.tags = ["WillFactory"];

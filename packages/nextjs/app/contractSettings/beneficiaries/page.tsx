@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useContractForm } from "../context";
+import { parseEther } from "viem";
+import { useWriteContract } from "wagmi";
 import { AddressInput, EtherInput } from "@/components/scaffold-eth";
-import { useScaffoldWriteContract } from "@/hooks/scaffold-eth";
+import willContractAbi from "@/contracts/willContractAbi";
 
 interface Beneficiary {
   address: string;
@@ -11,10 +13,10 @@ interface Beneficiary {
 }
 
 export default function Beneficiaries() {
-  const { updateCurrentStep } = useContractForm();
+  const { updateCurrentStep, willContractAddress } = useContractForm();
   const [beneficiaries, setBeneficiaries] = useState<Beneficiary[]>([]);
   const [newBeneficiary, setNewBeneficiary] = useState<Beneficiary>({ address: "", amount: "" });
-  const { writeContractAsync, isPending } = useScaffoldWriteContract("EthInheritance");
+  const { error, isPending, writeContract } = useWriteContract();
 
   useEffect(() => {
     updateCurrentStep(3);
@@ -46,17 +48,21 @@ export default function Beneficiaries() {
       return;
     }
     try {
-      // await writeContractAsync({
-      //   functionName: "addBeneficiary",
-      //   args: [beneficiaries[0]],
-      // });
+      await writeContract({
+        address: willContractAddress,
+        abi: willContractAbi,
+        functionName: "addBeneficiaries",
+        args: [
+          beneficiaries.map(beneficiary => beneficiary.address),
+          beneficiaries.map(beneficiary => parseEther(beneficiary.amount)),
+        ],
+      });
     } catch (error) {}
   };
 
   return (
     <div className="py-10 flex flex-col items-center space-y-4">
       <h1 className="title text-center">Add Beneficiaries</h1>
-      {/* <BeneficiaryForm /> */}
       <ul className="list-none">
         {beneficiaries.map((beneficiary, index) => (
           <li key={index} className="mb-2">

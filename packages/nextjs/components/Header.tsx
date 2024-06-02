@@ -4,7 +4,7 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Bars3Icon, BugAntIcon, PaperAirplaneIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon, Bars3Icon, BugAntIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "@/components/scaffold-eth";
 import { useOutsideClick } from "@/hooks/scaffold-eth";
 
@@ -25,9 +25,14 @@ export const menuLinks: HeaderMenuLink[] = [
     icon: <BugAntIcon className="h-4 w-4" />,
   },
   {
-    label: "Transfer Funds",
-    href: "/transfer",
-    icon: <PaperAirplaneIcon className="h-4 w-4" />,
+    label: "Settings",
+    href: "/contractSettings",
+    icon: <AdjustmentsHorizontalIcon className="h-4 w-4" />,
+  },
+  {
+    label: "My Contract",
+    href: "/summary",
+    icon: <DocumentCheckIcon className="h-4 w-4" />,
   },
 ];
 

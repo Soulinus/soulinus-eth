@@ -6,66 +6,31 @@ import { GenericContractsDeclaration } from "@/utils/scaffold-eth/contract";
 
 const deployedContracts = {
   31337: {
-    EthInheritance: {
+    WillFactory: {
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       abi: [
         {
-          inputs: [],
-          stateMutability: "nonpayable",
-          type: "constructor",
-        },
-        {
           anonymous: false,
           inputs: [
             {
-              indexed: false,
+              indexed: true,
               internalType: "address",
-              name: "beneficiary",
+              name: "owner",
               type: "address",
             },
             {
               indexed: false,
-              internalType: "uint256",
-              name: "amount",
-              type: "uint256",
-            },
-          ],
-          name: "BeneficiaryAdded",
-          type: "event",
-        },
-        {
-          anonymous: false,
-          inputs: [
-            {
-              indexed: false,
-              internalType: "uint256",
-              name: "lockTime",
-              type: "uint256",
-            },
-          ],
-          name: "FundsLocked",
-          type: "event",
-        },
-        {
-          anonymous: false,
-          inputs: [],
-          name: "FundsReleased",
-          type: "event",
-        },
-        {
-          inputs: [
-            {
               internalType: "address",
-              name: "_beneficiary",
+              name: "willContract",
               type: "address",
             },
-            {
-              internalType: "uint256",
-              name: "_amount",
-              type: "uint256",
-            },
           ],
-          name: "addBeneficiary",
+          name: "WillCreated",
+          type: "event",
+        },
+        {
+          inputs: [],
+          name: "createWill",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -74,30 +39,11 @@ const deployedContracts = {
           inputs: [
             {
               internalType: "address",
-              name: "",
+              name: "_owner",
               type: "address",
             },
           ],
-          name: "beneficiaries",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          name: "beneficiaryAddresses",
+          name: "getWillAddress",
           outputs: [
             {
               internalType: "address",
@@ -111,126 +57,12 @@ const deployedContracts = {
         {
           inputs: [
             {
-              internalType: "bytes",
+              internalType: "address",
               name: "",
-              type: "bytes",
+              type: "address",
             },
           ],
-          name: "checkUpkeep",
-          outputs: [
-            {
-              internalType: "bool",
-              name: "upkeepNeeded",
-              type: "bool",
-            },
-            {
-              internalType: "bytes",
-              name: "",
-              type: "bytes",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "distributed",
-          outputs: [
-            {
-              internalType: "bool",
-              name: "",
-              type: "bool",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "fundsLocked",
-          outputs: [
-            {
-              internalType: "bool",
-              name: "",
-              type: "bool",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "getBeneficiaries",
-          outputs: [
-            {
-              internalType: "address[]",
-              name: "",
-              type: "address[]",
-            },
-            {
-              internalType: "uint256[]",
-              name: "",
-              type: "uint256[]",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "getBlockTimestamp",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "getContractBalance",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "_lockTime",
-              type: "uint256",
-            },
-          ],
-          name: "lockFunds",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "lockTime",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
-          name: "owner",
+          name: "wills",
           outputs: [
             {
               internalType: "address",
@@ -240,29 +72,9 @@ const deployedContracts = {
           ],
           stateMutability: "view",
           type: "function",
-        },
-        {
-          inputs: [
-            {
-              internalType: "bytes",
-              name: "",
-              type: "bytes",
-            },
-          ],
-          name: "performUpkeep",
-          outputs: [],
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          stateMutability: "payable",
-          type: "receive",
         },
       ],
-      inheritedFunctions: {
-        checkUpkeep: "@chainlink/contracts/src/v0.8/automation/interfaces/AutomationCompatibleInterface.sol",
-        performUpkeep: "@chainlink/contracts/src/v0.8/automation/interfaces/AutomationCompatibleInterface.sol",
-      },
+      inheritedFunctions: {},
     },
   },
 } as const;

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { stepsConfig } from "../stepsConfig";
 import { useContractForm } from "@/app/contractSettings/context";
 
@@ -10,9 +11,9 @@ export function Steps() {
     <div className="flex justify-center">
       <ul className="steps steps-vertical lg:steps-horizontal">
         {stepsConfig.map((step, index) => (
-          <li key={index} className={`step ${currentStep + 1 > index && "step-success"}`}>
-            {step.title}
-          </li>
+          <Link key={index} href={step.path} className={`step ${currentStep + 1 > index && "step-success"}`}>
+            <span>{step.title}</span>
+          </Link>
         ))}
       </ul>
     </div>

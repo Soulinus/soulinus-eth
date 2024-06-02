@@ -13,8 +13,8 @@ interface FormContextType {
   formData: FormData;
   updateForm: (newData: FormData) => void;
   updateCurrentStep: (step: number) => void;
-  contractAddress: string;
-  updateContractAddress: (address: string) => void;
+  willContractAddress: string;
+  updateWillContractAddress: (address: string) => void;
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
@@ -22,7 +22,7 @@ const FormContext = createContext<FormContextType | undefined>(undefined);
 export const ContractFormProvider = ({ children }: { children: ReactNode }) => {
   const [formData, setFormData] = useState<FormData>({});
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const [contractAddress, setContractAddress] = useState<string>("0x5FbDB2315678afecb367f032d93F642f64180aa3");
+  const [willContractAddress, setWillContractAddress] = useState<string>("");
 
   const updateForm = (newData: FormData) => {
     setFormData(prev => ({
@@ -35,8 +35,8 @@ export const ContractFormProvider = ({ children }: { children: ReactNode }) => {
     setCurrentStep(step);
   };
 
-  const updateContractAddress = (address: string) => {
-    setContractAddress(address);
+  const updateWillContractAddress = (address: string) => {
+    setWillContractAddress(address);
   };
 
   const providerValue = {
@@ -44,8 +44,8 @@ export const ContractFormProvider = ({ children }: { children: ReactNode }) => {
     formData,
     updateForm,
     updateCurrentStep,
-    contractAddress,
-    updateContractAddress,
+    willContractAddress,
+    updateWillContractAddress,
   };
 
   return <FormContext.Provider value={providerValue}>{children}</FormContext.Provider>;

@@ -9,7 +9,7 @@ import { Address, Balance, EtherInput } from "@/components/scaffold-eth";
 
 export default function DepositFunds() {
   const [loading, setLoading] = useState(false);
-  const { updateCurrentStep, contractAddress } = useContractForm();
+  const { updateCurrentStep, willContractAddress } = useContractForm();
   useEffect(() => {
     updateCurrentStep(1);
   }, [updateCurrentStep]);
@@ -19,7 +19,7 @@ export default function DepositFunds() {
 
   async function transferFunds() {
     console.log(`transferFunds - ${fundAmount} ETH`);
-    sendTransaction({ to: contractAddress, value: parseEther(fundAmount) });
+    sendTransaction({ to: willContractAddress, value: parseEther(fundAmount) });
   }
 
   return (
@@ -33,10 +33,10 @@ export default function DepositFunds() {
         Connected Wallet Balance: <Balance address={connectedAddress} />
       </div>
       <div className="text-sm font-semibold mb-2">
-        Contract Address: <Address address={contractAddress} format="long" />
+        Contract Address: <Address address={willContractAddress} format="long" />
       </div>
       <div className="text-sm font-semibold">
-        Contract Balance: <Balance address={contractAddress} />
+        Contract Balance: <Balance address={willContractAddress} />
       </div>
 
       <EtherInput placeholder="Amount to send" value={fundAmount} onChange={value => setFundAmount(value)} />

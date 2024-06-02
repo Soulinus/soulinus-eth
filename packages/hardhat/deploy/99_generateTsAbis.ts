@@ -99,7 +99,7 @@ function getContractDataFromDeployments() {
  * Generates the TypeScript contract definition file based on the json output of the contract deployment scripts
  * This script should be run last.
  */
-const generateTsAbis: DeployFunction = async function () {
+const generateTsAbis: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const TARGET_DIR = "../nextjs/contracts/";
   const allContractsData = getContractDataFromDeployments();
 
@@ -115,6 +115,22 @@ const generateTsAbis: DeployFunction = async function () {
     prettier.format(
       `${generatedContractComment} import { GenericContractsDeclaration } from "@/utils/scaffold-eth/contract"; \n\n
  const deployedContracts = {${fileContent}} as const; \n\n export default deployedContracts satisfies GenericContractsDeclaration`,
+      {
+        parser: "typescript",
+      },
+    ),
+  );
+
+  const willContractArtifact = await hre.artifacts.readArtifact("Will");
+  fs.writeFileSync(
+    `${TARGET_DIR}willContractAbi.ts`,
+    prettier.format(
+      `${generatedContractComment} import { Abi } from "viem"; \n\n
+ const willContractAbi = ${JSON.stringify(
+   willContractArtifact.abi,
+   null,
+   2,
+ )} as const; \n\n export default willContractAbi satisfies Abi`,
       {
         parser: "typescript",
       },
